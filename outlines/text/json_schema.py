@@ -228,6 +228,10 @@ def match_step_to_regex(step):
         case {"type": "string", "minLength": min_length}:
             return f'".{{{min_length},}}"'
 
+        case {"type": "number", "maximum": max_num, "minimum": min_num}:
+            max_num = str(round(float(max_num),2)).replace(".", "\.")
+            return rf'"(([{int(min_num)}]\.\d+)|{max_num})"'
+
         case {"type": field_type}:
             return type_to_regex[field_type]
 

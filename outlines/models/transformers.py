@@ -21,8 +21,8 @@ class Transformers:
         tokenizer: "PreTrainedTokenizer",
         device: Optional[str] = None,
     ):
-        self.device = device if device is not None else "cpu"
-        self.model = model.to(self.device)
+        self.model = model
+        self.device = model.device
         self.tokenizer = tokenizer
 
     def __call__(
